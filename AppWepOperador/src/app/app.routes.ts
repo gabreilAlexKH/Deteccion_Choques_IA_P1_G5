@@ -10,13 +10,13 @@ import { ResponderComponent } from "./ventana/responder/responder.component";
 
 export const routes: Routes = [
   {path: "inicio", component: InicioComponent},
-  {path: "rechazado", component: RechazadoComponent},
+  {path: "rechazado/:foto", component: RechazadoComponent},
   {path: "operador", component: OperadorComponent,
     children: [
-      { path: "notificacion", component: NotificacionComponent },
-      { path: "revision", component: RevisionComponent },
-      { path: "responder", component: ResponderComponent },
-      { path: "**", redirectTo:"notificacion" },
+      { path: "notificacion/:foto/:label", component: NotificacionComponent },
+      { path: "revision/:foto/:label", component: RevisionComponent },
+      { path: "responder/:foto/:label", component: ResponderComponent },
+      { path: "**", redirectTo:"inicio" },
     ]
   },
   {path: "**" , redirectTo:"inicio"}
