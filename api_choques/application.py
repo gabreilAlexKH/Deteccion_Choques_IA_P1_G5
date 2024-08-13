@@ -6,7 +6,6 @@ import json
 import random
 
 import os
-import shutil
 
 app = Flask(__name__)
 api = Api(app)
@@ -36,7 +35,7 @@ def get_image(nombre):
 
     for foto in img_list:
         if foto == nombre:
-            img_path = os.path.join(img_dir, img_list[counter])
+            img_path = os.path.join(img_dir, foto)
             return img_path 
         counter+=1
 
@@ -47,31 +46,29 @@ def get_folder_count():
     img_list = os.listdir(img_dir)
     return len(img_list)
 
-def get_extension(src):
-    _, extension = os.path.splitext(src)
-    return extension
+def get_extension(filename):
 
-def save_foto(src):
+    return filename.rsplit('.', 1)[1].lower()
 
+def save_foto(file):
+
+    img_dir = "./images"
     n = get_folder_count() + 1
-    extension = get_extension(src)
-    foto_name = str(n) + str(extension)
+    extension = get_extension(file.filename)
+    foto_name = str(n) + "." + str(extension)
 
-    dst = "./images/" + foto_name
-    shutil.copyfile(src, dst)
+    file.save(os.path.join(img_dir , foto_name))
+
     return foto_name
 
 
 class Detector(Resource):
     def post(self):
-        print("aaaa")
-        
-        args = json.loads(request.data.decode())
-        foto = args["foto"]
-    
-        foto_name = save_foto(foto)
 
+        foto_file = request.files.getlist('foto')[0]
+        foto_name = save_foto(foto_file)
         foto_procesada = preprocess(foto_name)
+
         int_label = predict(foto_procesada)
 
         label = "None"
@@ -101,7 +98,7 @@ class Image(Resource):
         return send_file(image, mimetype='image/')
 
  
-api.add_resource(Detector, '/modelo')
+api.add_resource(Detector, '/modelo/')
 api.add_resource(Image, '/images/<string:nombre>')
 
 

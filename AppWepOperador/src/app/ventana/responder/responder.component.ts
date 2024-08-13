@@ -5,11 +5,12 @@ import {FotoCardComponent} from '../../componente/foto-card/foto-card.component'
 import {Respuesta} from '../../interfases/respuesta'
 import { ActivatedRoute , Router} from '@angular/router';
 import {ModeloChoquesService} from "../../servicio/modelo-choques.service"
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-responder',
   standalone: true,
-  imports: [MatButtonModule , MatIconModule,FotoCardComponent],
+  imports: [MatButtonModule , MatIconModule,FotoCardComponent , MatProgressSpinnerModule],
   templateUrl: './responder.component.html',
   styleUrl: './responder.component.scss'
 })
@@ -23,6 +24,11 @@ export class ResponderComponent {
     foto: "http://127.0.0.1:5005/images/1.jpg",
     label: "Accident"
   }
+
+  not_call_salud = true
+  not_call_atm = true
+  not_call_bomberos = true
+  not_call_policia = true
 
   foto:string =  "1.jpg"
 
@@ -41,5 +47,21 @@ export class ResponderComponent {
 
     })
 
+  }
+
+  despacharSalud(){
+    this.not_call_salud = false
+  }
+
+  despacharATM(){
+    this.not_call_atm = false
+  }
+
+  despacharBomberos(){
+    this.not_call_bomberos = false
+  }
+
+  despacharPolicia(){
+    this.not_call_policia = false
   }
 }

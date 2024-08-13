@@ -13,12 +13,12 @@ export class ModeloChoquesService {
   }
 
 
-  public post_foto(foto_dir:string){
+  public post_foto(file:File){
 
-    const headers = { 'content-type': 'application/json'}
-    const body= JSON.stringify({"foto": foto_dir});
+    const body = new FormData();
+    body.append("foto", file);
+    return this.http.post(this.url + "/modelo" ,  body)
 
-    return this.http.post(this.url + "/modelo" ,  body, {'headers':headers} ,)
   }
 
 

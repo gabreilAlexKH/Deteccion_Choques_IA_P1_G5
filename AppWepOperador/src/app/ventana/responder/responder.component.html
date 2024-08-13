@@ -4,28 +4,68 @@
       <app-foto-card [respuesta]=respuesta></app-foto-card>
     </div>
     <div class="col-5">
-      <div class="d-grid gap-2 col-8 mx-auto">
+      <div class="d-grid gap-2 col-10 mx-auto">
         <h3 class="m-2" color="primary">Contactar</h3>
 
-        <button class="m-2" mat-raised-button color="primary">
+        <button class="m-2" mat-raised-button color="primary" [disabled]=!not_call_salud (click)="despacharSalud()">
           Salud
           <mat-icon>local_hospital</mat-icon>
         </button>
 
-        <button class="m-2" mat-raised-button color="primary">
+        <button class="m-2" mat-raised-button color="primary"[disabled]=!not_call_atm (click)="despacharATM()">
           ATM
           <mat-icon>directions</mat-icon>
         </button>
 
-        <button class="m-2" mat-raised-button color="primary">
+        <button class="m-2" mat-raised-button color="primary"[disabled]=!not_call_bomberos (click)="despacharBomberos()">
           Bomberos
           <mat-icon>fire_truck</mat-icon>
         </button>
 
-        <button class="m-2" mat-raised-button color="primary">
+        <button class="m-2" mat-raised-button color="primary"[disabled]=!not_call_policia (click)="despacharPolicia()">
           Policia
           <mat-icon>local_police</mat-icon>
         </button>
+      </div>
+
+      <div class="d-grid gap-2 col-10  m-2 ">
+
+        <div class="row justify-content-center" [hidden]=not_call_salud>
+          <div class="col-7">
+            <p class="text-sm-end">Despachando Salud:</p>
+          </div>
+          <div class="col-2">
+            <mat-spinner [diameter]="15"></mat-spinner>
+          </div>
+        </div>
+
+        <div class="row justify-content-center" [hidden]=not_call_atm>
+          <div class="col-7">
+            <p class="text-sm-end">Despachando ATM:</p>
+          </div>
+          <div class="col-2">
+            <mat-spinner [diameter]="15"></mat-spinner>
+          </div>
+        </div>
+
+        <div class="row justify-content-center" [hidden]=not_call_bomberos>
+          <div class="col-7">
+            <p class="text-sm-end">Despachando Bomberos:</p>
+          </div>
+          <div class="col-2">
+            <mat-spinner [diameter]="15"></mat-spinner>
+          </div>
+        </div>
+
+        <div class="row justify-content-center" [hidden]=not_call_policia>
+          <div class="col-7">
+            <p class="text-sm-end">Despachando Policia:</p>
+          </div>
+          <div class="col-2">
+            <mat-spinner [diameter]="15"></mat-spinner>
+          </div>
+        </div>
+
 
       </div>
     </div>

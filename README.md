@@ -6,12 +6,13 @@
 **Bootstrap 5**
 src: https://getbootstrap.com/docs/5.0/getting-started/introduction/
 
-**Angular 15.0.0**
-src: https://angular.io/docs
+**Angular 17.0.0**
+src: https://v17.angular.io/docs
 
 ## Iniciar:
+En ./AppWepOperador
 npm install
-ng run
+ng serve
 
 ###  Back end
 
@@ -19,8 +20,9 @@ ng run
 **Python 3.10**
 
 ## Iniciar:
-
+En ./api_choques
 python3 -m venv env
 env\Scripts\activate
 python3 -m pip install -r requirements.txt
-set FLASK_ENV=development; set FLASK_APP=application; flask run
+pip install flask
+python application.py
